@@ -1,0 +1,250 @@
+/* body样式 */
+body {
+  font-family: 'HarmonyOS Sans SC', sans-serif;
+  background-color: #f0f0f0; /* 页面背景色 */
+  color: #333;
+  margin: 25px; /* 页面居中 */
+}
+
+/* 全局样式 */
+.container {
+  max-width: 80%; /* 容器宽度 */
+  margin: 0 auto; /* 容器水平居中 */
+  background-color: #f0f9ff; /* 容器背景色 */
+  padding: 30px; /* 容器内边距 */
+  border-radius: 30px; /* 容器圆角 */
+  border: 2px solid #cccccc; /* 容器边框 */
+  box-shadow: 0 0 40px rgba(69, 125, 222, 0.607); /* 容器阴影 */
+  padding-bottom: 15px;
+}
+/* 标题样式 */
+header {
+  display: flex; /* 标题内部元素横向排列 */
+  justify-content: space-between; /* 标题内部元素左右对齐 */
+  align-items: center; /* 标题内部元素垂直居中 */
+  border-bottom: 2px solid #a9a9a9; /* 标题下边框 */
+  padding-bottom: 10px; /* 标题下边框与标题文字的间距 */
+  padding-left: 20px; /* 标题左内边距 */
+  padding-right: 20px;   /* 标题右内边距 */
+}
+
+/* 标题文字样式 */
+header h1 {
+  margin: 0; /* 标题水平居中 */
+  font-size: 22px;
+  color: #333;
+}
+
+/* 按钮组的样式 */
+.buttons {
+  display: flex;  /* 按钮横向排列 */
+  gap: 20px; /* 按钮之间的间距 */
+}
+
+/* 上传下载控件、信息按钮的样式 */
+.custom-file-upload,
+.info-button,
+.download-button {
+  font-family: 'HarmonyOS Sans SC';
+  padding: 10px 20px; /* 按钮内边距 */
+  border-radius: 10px; /* 按钮圆角 */
+  background-color: #60bf64; /* 按钮背景色 */
+  color: white; /* 按钮文字颜色 */
+  cursor: pointer; /* 鼠标悬停时显示手型 */
+  border: none; /* 去掉按钮边框 */
+  transition: background-color 0.3s; /* 鼠标悬停时背景色渐变 */
+  font-size: 16px; /* 统一按钮字体大小 */
+}
+
+.content {
+  width: 100%;
+  display: flex; /* 内容区域横向排列 */
+  align-items: flex-start; /* 让内容顶部对齐 */
+  margin-top: 20px;
+  justify-content: space-around;
+  gap: 20px; /* 添加间距 */
+}
+
+
+.left-widget, .right-widget {
+  flex: 1; /* 让左右两个widget均分空间 */
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* 添加间距 */
+}
+
+.widget-container {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 40px;
+  border: 1px solid #ddd;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  min-height: 260px; /* 设置最小高度 */
+}
+.widget-container2 {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 40px;
+  border: 1px solid #ddd;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  min-height: 200px; /* 设置最小高度 */
+  text-align: center;
+} 
+
+.widget-container3 {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 40px;
+  border: 1px solid #ddd;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  min-height: 520px; /* 设置最小高度 */ 
+} 
+
+.widget-container3 h2 {
+  text-align: center;
+}
+
+.chart-container {
+  width: 100%; /* 设置宽度为100% */
+  height: 200px; /* 固定高度 */
+}
+
+.widget-container h2 {
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.status-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.status-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+} 
+
+.status-item label {
+  width: 45%; /* 调整标签宽度 */
+  font-weight: bold;
+}
+
+.status-item input[type="range"] {
+  flex-grow: 1; /* 让滑块占据剩余空间 */
+}
+/*
+.status-item .large-label {
+  width: 30%;  调整RMSSD百分比标签的宽
+}*/
+
+.large-slider {
+  flex-grow: 2; /* 让这个滑块占据更大宽度 */
+}
+
+.suggestions p {
+  font-size: 16px;
+  line-height: 1.4;
+  min-height: 60px;
+}
+
+footer {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+  color: #777;
+} 
+ 
+
+/* 滑块基本样式 */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 8px;
+  outline: none;
+  border-radius: 5px;
+  transition: background 0.3s;
+  --thumb-color: #777; /* 默认拇指颜色 */
+}
+
+/* 设置滑块轨道样式 */
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 8px;
+  border-radius: 5px;
+}
+
+/* 设置滑块拇指的样式 */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  background: var(--thumb-color); /* 使用动态颜色 */
+  cursor: pointer;
+  border-radius: 50%;
+  margin-top: -4px; /* 使拇指与轨道对齐 */
+  transition: background-color 0.3s;
+}
+
+/* 模态框样式 */
+.modal {
+  display: flex;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* 半透明背景 */
+  justify-content: center;
+  align-items: center;
+}
+
+/* 模态框内容样式 */
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+  font-size: 18px;
+}
+
+/* infoButton模态框 */
+/* 模态框背景.modal与上面的相同 */
+
+/* 模态框内容样式 */
+.modal-content-2 {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 645px;
+  text-align: left;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+/* 标题和内容 */
+.modal-content-2 h2 {
+  margin-top: 0;
+}
+
+.modal-content-2 p,
+.modal-content-2 ul li {
+    line-height: 1.78; /* 设置行高 */
+}
+
+/* 关闭按钮样式 */
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #333;
+}
+
