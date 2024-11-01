@@ -1,4 +1,4 @@
-**Note**. This is the official document of Llama3-Chinese. Please download Llama3-Chinese to this folder yourself.
+**Note**. This is the official document of Llama3-Chinese. Please download Llama3-Chinese to this folder yourself. Backup link: https://pan.baidu.com/s/1aGYGY_yo7ogeZK-RcS6sxQ?pwd=DaSE
 
 <p align="left">
     <a href="README_CN.md">中文</a>&nbsp ｜ &nbspEnglish

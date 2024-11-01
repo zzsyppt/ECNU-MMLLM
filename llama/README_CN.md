@@ -1,4 +1,4 @@
-**注**. 此为**Llama3-Chinese**的官方文档，请自行将Llama3-Chinese下载到本目录。
+**注**. 此为**Llama3-Chinese**的官方文档，请自行将Llama3-Chinese下载到本目录。备用链接：https://pan.baidu.com/s/1aGYGY_yo7ogeZK-RcS6sxQ?pwd=DaSE
 
 <p align="left">
     中文</a>&nbsp ｜ &nbsp<a href="README.md">English</a>
