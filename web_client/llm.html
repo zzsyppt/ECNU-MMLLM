@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <link rel="icon" type="image/png" href="./image/favicon.jpg">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <title>多模态心理大模型</title>
+    <link rel="stylesheet" href="./styles/styles_llm.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>ECNU DaSE 多模态心理大模型</h1>
+            <div class="buttons">
+                <button id="infoButton" class="info-button">指标说明</button>
+                <label for="uploadButton" class="custom-file-upload">数据上传</label>
+                <input id="fileUpload" type="file" style="display:none;">
+                <button id="downloadButton" class="download-button">报告下载</button>
+            </div>
+        </header>
+        <div class="content">
+            <div class="left-widget">
+                <div class="widget-container">
+                    <h2>心率监测</h2>
+                    <div class="chart-container">
+                        <canvas id="heartRateChart"></canvas>
+                    </div>
+                </div>
+                <div class="widget-container2">
+                    <h2>建议</h2>
+                    <div class="suggestions">
+                        <p id="suggestionsText"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="right-widget">
+                <div class="widget-container3">
+                    <h2>心理状况总览</h2>
+                    <div class="status-grid">
+                        <div class="status-item">
+                            <label>RMSSD</label>
+                            <input id="rmssdPercent"   type="range" min="0" max="50" value="0" disabled step="0.01">
+                        </div>
+                        <div class="status-item">
+                            <label>SDNN</label>
+                            <input id="sdnnPercent"   type="range" min="0" max="250" value="0" disabled step="0.01">
+                        </div>
+                        <div class="status-item">
+                            <label>PNN50</label>
+                            <input id="pnn50Percent"   type="range" min="0" max="14" value="0" disabled step="0.01">
+                        </div>
+                        <div class="status-item">
+                            <label>SN</label>
+                            <input id="snPercent"   type="range" min="0" max="30" value="0" disabled step="0.01">
+                        </div>
+                        <div class="status-item">
+                            <label>总能量</label>
+                            <span id="totalEnergy">⭐</span>
+                        </div>
+                        <div class="status-item">
+                            <label>放松度</label>
+                            <span id="relaxation">⭐</span>
+                        </div>
+                        <div class="status-item">
+                            <label>压力指数</label>
+                            <span id="stressIndex">⭐</span>
+                        </div>
+                        <div class="status-item">
+                            <label>情绪稳定性</label>
+                            <span id="emotionStability">⭐</span>
+                        </div>
+                        <div class="status-item">
+                            <label>心情颜色</label>
+                            <span id="moodColor" style="background-color: #73C6B6; display: inline-block; width: 20px; height: 20px;"></span>
+                        </div>
+                        <div class="status-item">
+                            <label>心情状态</label>
+                            <span id="moodStatus">未知</span>
+                        </div>
+                        <div class="status-item">
+                            <label>心理弹性等级</label>
+                            <span id="psychologicalResilience">⭐</span>
+                        </div>
+                        <div class="status-item">
+                            <label>身心和谐度</label>
+                            <span id="physicalMentalHarmony">⭐</span>
+                        </div>
+                        <div class="status-item">
+                            <label>综合得分</label>
+                            <span id="overallScore">0</span>
+                        </div>
+                        <div class="status-item">
+                            <label>焦虑指数</label>
+                            <span id="anxietyIndex">⭐</span>
+                        </div>
+                        <div class="status-item">
+                            <label>疲劳指数</label>
+                            <span id="fatigueIndex">⭐</span>
+                        </div>
+                        <div class="status-item">
+                            <label>心率时长</label>
+                            <span id="timespan">0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 正在分析模态框 -->
+    <div id="loadingModal" style="display: none;" class="modal">
+        <div class="modal-content">
+            <p>正在分析，请稍候...</p>
+        </div>
+    </div>
+    <!-- infoButton模态框 -->
+    <div id="infoModal" class="modal" style="display: none;">
+        <div class="modal-content-2">
+            <span id="closeModal" class="close-button">&times;</span>
+            <h2>指标说明</h2>
+            <p>以下是报告中各指标的含义和正常范围，供参考。</p>
+            <ul>
+                <li><strong>RMSSD：</strong>均方根差，衡量短期心率变异性，主要反映副交感神经（迷走神经）活动水平。正常值为15-39，过低的 RMSSD 表示用户压力较大或情绪波动较大。</li>
+                <li><strong>SDNN：</strong>NN间隔标准差，反映总体心率变异性，受到交感和副交感神经活动的影响。正常值为102-180，过低的SDNN可能提示个体处于高压力状态或心理负担较大。</li>
+                <li><strong>pNN50：</strong>表示相邻心跳间隔差值大于 50 毫秒的比例。健康人群的 pNN50 值一般在 2% 到 8% 之间，较低的 pNN50 可能提示用户情绪不稳或处于紧张状态。</li>
+                <li><strong>SN：</strong>交感神经活动指数，衡量交感神经系统的活跃程度。SN 值超过 15 用户则可能压力或焦虑。</li>
+                <li><strong>总能量：</strong>反映整体生理活跃程度。总能量星级越高，表示用户的活力越强。</li>
+                <li><strong>压力指数：</strong>反映用户的心理压力水平，压力指数越高，用户可能处于较紧张状态。</li>
+                <li><strong>放松度：</strong>衡量用户的放松状态，放松度星级越高，表示用户更放松。</li>
+                <li><strong>情绪稳定性：</strong>评估用户的情绪是否稳定，情绪稳定性星级越高，表示情绪越稳定。</li>
+                <li><strong>心情颜色：</strong>该颜色最佳反映用户的心情状态。</li>
+                <li><strong>心情状态：</strong>直接描述用户的当前情绪。</li>
+                <li><strong>心理弹性等级：</strong>表示用户应对压力和逆境的能力，星级越高，心理弹性越强。</li>
+                <li><strong>身心和谐度：</strong>评估身体和心理的平衡状态，和谐度越高，表示身心更协调。</li>
+                <li><strong>综合得分：</strong>根据各项指标综合评估用户的心理健康状况，以100分记。</li>
+                <li><strong>焦虑指数：</strong>焦虑程度的测量，星级越高，表示焦虑程度越高。</li>
+                <li><strong>疲劳指数：</strong>用户的疲劳水平，疲劳指数越高，用户越表现出疲劳。</li>
+                <li><strong>心率时长：</strong>心率测量的总时长，单位为秒。</li>
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2024 让关爱遍及每一个人！</p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="./scripts/script_llm.js"></script>
+</body>
+</html>
+
+
+
